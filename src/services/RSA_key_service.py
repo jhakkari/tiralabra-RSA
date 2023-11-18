@@ -44,3 +44,40 @@ class KeyService:
             else:
                 return False
         return True
+
+    def extended_gcd(self, a, b):
+        """Calculates the greatest common divisor for given integers and coefficients x,y such that ax + by = gcd(a,b)
+
+        Args:
+            a (int): Integer 1
+            b (int): Integer 2
+
+        Returns:
+            gcd (int): Greatest commond divisor
+            t, s (int): Quotiets by the gcd
+            old_s, old_t (int): Coefficients
+        """
+
+        old_r = a
+        old_s = 1
+        old_t = 0
+        r = b
+        s = 0
+        t = 1
+
+        while r != 0:
+            q = old_r // r
+            c = r
+            r = old_r - q * c
+            old_r = c
+
+            c = s
+            s = old_s - q * c
+            old_s = c
+
+            c = t
+            t = old_t - q * c
+            old_t = c
+
+        gcd = old_r
+        return (gcd, old_s, old_t, t, s)
