@@ -30,7 +30,7 @@ class KeyService:
 
         for i in range(k):
             a = random.randrange(2, n-2)
-            x = (a**d) % n
+            x = self.exp_by_squaring(a, d, n)
             for j in range(s):
                 y = (x * x) % n
                 if y == 1 and x != 1 and x != (n-1):
@@ -66,6 +66,27 @@ class KeyService:
             exp += 1
 
         return (d, exp)
+
+    def exp_by_squaring(self, base, exponent, modulus):
+        """Square-and-multiply algorithm. Faster way to calculate a^b % x on big numbers
+
+        Args:
+            base (int): Base of exponentation
+            exponent (int): Power of exponentation
+            modulus (int): Modulus of the calculation
+
+        Returns:
+            (int): Calculation result
+        """
+
+        result = 1
+        while exponent > 0:
+            if exponent % 2 == 1:
+                result = (result * base) % modulus
+
+            base = (base * base) % modulus
+            exponent = exponent // 2
+        return result
 
     def extended_ecd(self, a, b):
         """Calculates the greatest common divisor for given integers and coefficients x,y such that ax + by = gcd(a,b)

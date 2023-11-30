@@ -35,6 +35,30 @@ class TestKeyService(unittest.TestCase):
         self.assertEqual(exponent, 6)
         self.assertEqual(2**exponent * integer, number)
 
+    def test_exp_by_squaring_returns_correct_result_with_odd_base_exp_mod(self):
+        self.assertEqual(self.KeyService.exp_by_squaring(15, 3, 5), 0)
+
+    def test_exp_by_squaring_returns_correct_result_with_odd_base_exp_even_mod(self):
+        self.assertEqual(self.KeyService.exp_by_squaring(15, 3, 2), 1)
+
+    def test_exp_by_squaring_returns_correct_result_with_odd_base_mod_even_exp(self):
+        self.assertEqual(self.KeyService.exp_by_squaring(15, 4, 2), 1)
+
+    def test_exp_by_squaring_returns_correct_result_with_odd_base_even_exp_mod(self):
+        self.assertEqual(self.KeyService.exp_by_squaring(15, 4, 6), 3)
+
+    def test_exp_by_squaring_returns_correct_result_with_even_base_exp_mod(self):
+        self.assertEqual(self.KeyService.exp_by_squaring(16, 4, 2), 0)
+
+    def test_exp_by_squaring_returns_correct_result_with_even_base_exp_odd_mod(self):
+        self.assertEqual(self.KeyService.exp_by_squaring(16, 4, 3), 1)
+
+    def test_exp_by_squaring_returns_correct_result_with_even_base_mod_odd_exp(self):
+        self.assertEqual(self.KeyService.exp_by_squaring(16, 5, 2), 0)
+
+    def test_exp_by_squaring_returns_correct_result_with_even_base_odd_exp_mod(self):
+        self.assertEqual(self.KeyService.exp_by_squaring(16, 7, 5), 1)
+
     def test_extended_ecd_calculates_greatest_common_divisor_correctly(self):
         self.assertEqual(self.KeyService.extended_ecd(54, 24)[0], 6)
 
