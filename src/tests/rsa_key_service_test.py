@@ -59,8 +59,21 @@ class TestKeyService(unittest.TestCase):
     def test_exp_by_squaring_returns_correct_result_with_even_base_odd_exp_mod(self):
         self.assertEqual(self.KeyService.exp_by_squaring(16, 7, 5), 1)
 
-    def test_extended_ecd_calculates_greatest_common_divisor_correctly(self):
-        self.assertEqual(self.KeyService.extended_ecd(54, 24)[0], 6)
+    def test_extended_ecd_calculates_greatest_common_divisor_while_other_parameter_is_zero(self):
+        self.assertEqual(self.KeyService.extended_ecd(0, 21)[0], 21)
+        self.assertEqual(self.KeyService.extended_ecd(3, 0)[0], 3)
+
+    def test_extended_ecd_calculates_greatest_common_divisor_with_odd_parameters(self):
+        self.assertEqual(self.KeyService.extended_ecd(53, 21)[0], 1)
+
+    def test_extended_ecd_calculates_greatest_common_divisor_with_odd_and_even_parameters(self):
+        self.assertEqual(self.KeyService.extended_ecd(46, 240)[0], 2)
+
+    def test_extended_ecd_calculates_greatest_common_divisor_with_even_parameters(self):
+        self.assertEqual(self.KeyService.extended_ecd(16, 32)[0], 16)
+
+    def test_extended_ecd_calculates_greatest_common_divisor_with_even_odd_parameters(self):
+        self.assertEqual(self.KeyService.extended_ecd(4, 43)[0], 1)
 
     def test_lcm_calculates_least_common_divisor_correctly(self):
         self.assertEqual(self.KeyService.lcm(21, 6), 42)
