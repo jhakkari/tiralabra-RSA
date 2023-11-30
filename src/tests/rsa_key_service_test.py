@@ -75,8 +75,14 @@ class TestKeyService(unittest.TestCase):
     def test_extended_ecd_calculates_greatest_common_divisor_with_even_odd_parameters(self):
         self.assertEqual(self.KeyService.extended_ecd(4, 43)[0], 1)
 
-    def test_lcm_calculates_least_common_divisor_correctly(self):
+    def test_lcm_calculates_least_common_multiple_with_odd_parameters(self):
         self.assertEqual(self.KeyService.lcm(21, 6), 42)
+        
+    def test_lcm_calculates_least_common_multiple_with_even_parameters(self):
+        self.assertEqual(self.KeyService.lcm(1248, 7646), 4771104)
+
+    def test_lcm_calculates_least_common_multiple_with_even_and_odd_parameters(self):
+        self.assertEqual(self.KeyService.lcm(13, 7646), 99398)
 
     def test_find_prime_returns_correct_bit_length_number(self):
         prime = self.KeyService.find_prime(12)

@@ -125,7 +125,7 @@ class KeyService:
         gcd = old_r
         return (gcd, old_s, old_t, t, s)
 
-    def find_prime(self, b=17):
+    def find_prime(self, b=1048):
         """Generates and tests large odd numbers until prime is found
 
         Args:
@@ -155,7 +155,7 @@ class KeyService:
         """
 
         gcd = self.extended_ecd(a, b)[0]
-        lcm = int(abs(a) * (abs(b) / gcd))
+        lcm = abs(a) * (abs(b) // gcd)
         return lcm
 
     def choose_e(self, an):
