@@ -7,7 +7,7 @@ class KeyService:
         """Determines whether a given integer is likely to be a prime number
 
         Args:
-            n (int): An integer to be tested for primiality
+            n (int): An odd integer to be tested for primiality
             k (int): The number of rounds of testing to perform. Defaults to 40.
 
         Returns:
@@ -24,26 +24,48 @@ class KeyService:
         if n % 2 == 0:
             return False
 
-        s = 0
-        d = n-1
-        while d % 2 == 0:
-            s += 1
-            d //= 2
+        factors = self.find_factors(n-1)
+        d = factors[0]
+        s = factors[1]
 
         for i in range(k):
-            a = random.randrange(2, n-1)
+            a = random.randrange(2, n-2)
             x = (a**d) % n
-            if x == 1:
-                continue
-
             for j in range(s):
-                if x == n-1:
-                    break
+                y = (x * x) % n
+                if y == 1 and x != 1 and x != (n-1):
+                    return False
+                x = y
+                if y != 1:
+                    return False
 
-                x = (x * x) % n
-            else:
-                return False
         return True
+
+    def find_factors(self, n):
+        """Calculates an exponent exp and integer d such that:
+            exp is a positive integer
+            d is an odd positive integer
+            n = 2^exp * d
+
+        Args:
+            n (int): An even integer
+
+        Returns:
+            tuple: (d, exp)
+        """
+
+        exp = 1
+        d = 0
+        while True:
+            product = 2**exp
+            remainder = n % product
+            if remainder == 0:
+                d = n // product
+                if d % 2 != 0 and d > 0:
+                    break
+            exp += 1
+
+        return (d, exp)
 
     def extended_ecd(self, a, b):
         """Calculates the greatest common divisor for given integers and coefficients x,y such that ax + by = gcd(a,b)

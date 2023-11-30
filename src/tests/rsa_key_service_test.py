@@ -16,6 +16,25 @@ class TestKeyService(unittest.TestCase):
     def test_primality_test_identifies_a_prime(self):
         self.assertTrue(self.KeyService.miller_rabin_primality_test(7643))
 
+    def test_find_factors_returns_correct_exponent_and_integer_on_small_even_numbers(self):
+        factors = self.KeyService.find_factors(220)
+        integer = factors[0]
+        exponent = factors[1]
+
+        self.assertEqual(integer, 55)
+        self.assertEqual(exponent, 2)
+        self.assertEqual(2**exponent * integer, 220)
+
+    def test_find_factors_returns_correct_exponent_and_integer_on_large_even_numbers(self):
+        number = 132784658564487398769837698768576
+        factors = self.KeyService.find_factors(number)
+        integer = factors[0]
+        exponent = factors[1]
+
+        self.assertEqual(integer, 2074760290070115605778714043259)
+        self.assertEqual(exponent, 6)
+        self.assertEqual(2**exponent * integer, number)
+
     def test_extended_ecd_calculates_greatest_common_divisor_correctly(self):
         self.assertEqual(self.KeyService.extended_ecd(54, 24)[0], 6)
 
