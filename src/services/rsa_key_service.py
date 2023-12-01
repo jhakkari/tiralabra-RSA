@@ -4,7 +4,7 @@ import random
 class KeyService:
 
     def miller_rabin_primality_test(self, n, k=40):
-        """Determines whether a given integer is likely to be a prime number
+        """Determines whether a given integer is likely to be a prime
 
         Args:
             n (int): An odd integer to be tested for primiality
@@ -43,8 +43,8 @@ class KeyService:
 
     def find_factors(self, n):
         """Calculates an exponent exp and integer d such that:
-            exp is a positive integer
-            d is an odd positive integer
+            exp is a positive integer,
+            d is an odd positive integer,
             n = 2^exp * d
 
         Args:
@@ -89,7 +89,8 @@ class KeyService:
         return result
 
     def extended_ecd(self, a, b):
-        """Calculates the greatest common divisor for given integers and coefficients x,y such that ax + by = gcd(a,b)
+        """Calculates the greatest common divisor for given integers and
+            coefficients x,y such that ax + by = gcd(a,b)
 
         Args:
             a (int): Integer 1
@@ -125,23 +126,23 @@ class KeyService:
         gcd = old_r
         return (gcd, old_s, old_t, t, s)
 
-    def find_prime(self, b=1048):
-        """Generates and tests large odd numbers until prime is found
+    def find_prime(self, bit_length=1048):
+        """Generates and tests odd numbers until a prime is found
 
         Args:
-            b (int): The number of bits of the wanted result
+            bit_length (int): Number of bits of the result
 
         Returns:
-            random_int (int): A strong propable prime number
+            prime_candidate (int): A strong propable prime number
         """
 
         while True:
-            random_int = random.randint(2**(b-1), 2**b-1)
-            if random_int % 2 == 0:
+            prime_candidate = random.randint(2**(bit_length-1), 2**bit_length-1)
+            if prime_candidate % 2 == 0:
                 continue
 
-            if self.miller_rabin_primality_test(random_int):
-                return random_int
+            if self.miller_rabin_primality_test(prime_candidate):
+                return prime_candidate
 
     def lcm(self, a, b):
         """Calculates the least common multiple of two integers
@@ -158,40 +159,50 @@ class KeyService:
         lcm = abs(a) * (abs(b) // gcd)
         return lcm
 
-    def choose_e(self, an):
-        """Chooses an integer e such that 2 < e < an, e and an are coprime
+    def choose_public_key(self, an):
+        """Chooses an public key e such that 2 < e < an, e and an are coprime
 
         Args:
             an (int): λ(n), where λ is Carmichaels totient function
 
         Returns:
-            e (int): Chosen value for e
+            e (int): Public key
         """
-        # 2 < e < a(n) and gcd(e, a(n)) = 1
-        # Most commonly used: return 2**16+1
+
         e = random.randint(3, an - 1)
         while self.extended_ecd(e, an)[0] != 1:
             e = random.randint(3, an - 1)
 
         return e
 
-    def find_d(self, e, an):
-        return self.extended_ecd(e, an)[1] + an
+    def generate_private_key(self, public_key, an):
+        """Calculates private key s.t. private key is 
+            modular multiplicative inverse of private_key mod an
 
-    def generate(self):
-        """Generates public and private keys
+        Args:
+            public_key (int): Public key
+            an (int): λ(n), where λ is Carmichaels totient function
 
         Returns:
-            (n, e) (int): public key
-            (n, d) (int): private key
+            (int): Generated private key
+        """
+
+        return self.extended_ecd(public_key, an)[1] + an
+
+    def generate_keys(self):
+        """Generates public and private key
+
+        Returns:
+            (tuple): Contais generated keys and modulus
         """
 
         p = self.find_prime()
         q = self.find_prime()
-        n = p * q
+        modulus = p * q
 
-        an = self.lcm(p - 1, q - 1)
-        e = self.choose_e(an)
-        d = self.find_d(e, an)
+        an = self.lcm(p-1, q-1)
 
-        return ((n, e), (n, d))
+        public_key = self.choose_public_key(an)
+        private_key = self.generate_private_key(public_key, an)
+
+        return (public_key, modulus, private_key)

@@ -18,9 +18,9 @@ class KeyGenerationView:
         self._frame.destroy()
     
     def _handle_generate_keys(self):
-        keys = self._key_service.generate()
-        self._public_key_textbox.insert("end-1c", f"{keys[0]}")
-        self._private_key_textbox.insert("end-1c", f"{keys[1]}")
+        keys = self._key_service.generate_keys()
+        self._public_key_textbox.insert("end-1c", f"{keys[0]}, {keys[1]}")
+        self._private_key_textbox.insert("end-1c", f"{keys[2]}")
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)

@@ -85,28 +85,28 @@ class TestKeyService(unittest.TestCase):
         self.assertEqual(self.KeyService.lcm(13, 7646), 99398)
 
     def test_find_prime_returns_correct_bit_length_number(self):
-        prime = self.KeyService.find_prime(12)
-        self.assertLessEqual(prime.bit_length(), 12)
+        prime = self.KeyService.find_prime(1048)
+        self.assertLessEqual(prime.bit_length(), 1048)
 
     def test_find_prime_found_prime_is_in_correct_range(self):
         prime = self.KeyService.find_prime(12)
         self.assertGreaterEqual(prime, 2048)
         self.assertLessEqual(prime, 4095)
 
-    def test_choose_e_returns_integer_in_correct_range(self):
+    def test_choose_public_key_returns_integer_in_correct_range(self):
         an = 780
-        e = self.KeyService.choose_e(an)
-        self.assertGreater(e, 2)
-        self.assertLess(e, an)
+        public_key = self.KeyService.choose_public_key(an)
+        self.assertGreater(public_key, 2)
+        self.assertLess(public_key, an)
 
-    def test_choose_e_returns_coprime_integer(self):
+    def test_choose_public_key_returns_coprime_integer(self):
         an = 780
-        e = self.KeyService.choose_e(an)
-        greatest_common_divisor = gcd(e, an)
+        public_key = self.KeyService.choose_public_key(an)
+        greatest_common_divisor = gcd(public_key, an)
         self.assertEqual(greatest_common_divisor, 1)
 
-    def test_find_d_returns_correct_result(self):
-        e = 17
+    def test_generate_private_key_returns_correct_result(self):
+        public_key = 17
         an = 780
-        d = self.KeyService.find_d(e, an)
-        self.assertEqual(d, 413)
+        private_key = self.KeyService.generate_private_key(public_key, an)
+        self.assertEqual(private_key, 413)
