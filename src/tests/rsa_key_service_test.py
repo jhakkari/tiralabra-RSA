@@ -1,7 +1,8 @@
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 from math import gcd
 from services.rsa_key_service import KeyService
+
 
 class TestKeyService(unittest.TestCase):
     def setUp(self):
@@ -110,3 +111,21 @@ class TestKeyService(unittest.TestCase):
         an = 780
         private_key = self.KeyService.generate_private_key(public_key, an)
         self.assertEqual(private_key, 413)
+
+    def test_generate_keys_returns_correct_length_modulus(self):
+        modulus = self.KeyService.generate_keys()[1]
+        
+        self.assertGreaterEqual(modulus.bit_length(), 2047)
+        self.assertLessEqual(modulus.bit_length(), 2048)
+
+    @patch.object(KeyService, 'find_prime')
+    @patch.object(KeyService, 'choose_public_key')
+    def test_generate_keys_returns_correctly_generated_keys(self, choose_public_key, find_prime):
+        find_prime.side_effect = [61, 53]
+        choose_public_key.return_value = 17
+
+        keys = KeyService().generate_keys()
+
+        self.assertEqual(keys[0], 17)
+        self.assertEqual(keys[1], 3233)
+        self.assertEqual(keys[2], 413)
