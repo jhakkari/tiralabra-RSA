@@ -126,7 +126,7 @@ class KeyService:
         gcd = old_r
         return (gcd, old_s, old_t, t, s)
 
-    def find_prime(self, bit_length=1048):
+    def find_prime(self, bit_length=1024):
         """Generates and tests odd numbers until a prime is found
 
         Args:
