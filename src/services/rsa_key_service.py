@@ -1,7 +1,21 @@
+from secrets import SystemRandom
 import random
 
 
 class KeyService:
+    """
+    Class responsible for RSA key-pair creation.
+    """
+
+    def __init__(self):
+        self.number_generator = SystemRandom()
+
+    def get_random_integer(self, start, stop):
+        """
+        Generates secure random numbers from specified range, including start and stop.
+        """
+
+        return self.number_generator.randint(start, stop)
 
     def miller_rabin_primality_test(self, n, k=40):
         """Determines whether a given integer is likely to be a prime
@@ -137,7 +151,7 @@ class KeyService:
         """
 
         while True:
-            prime_candidate = random.randint(2**(bit_length-1), 2**bit_length-1)
+            prime_candidate = self.get_random_integer(2**(bit_length-1), 2**bit_length-1)
             if prime_candidate % 2 == 0:
                 continue
 

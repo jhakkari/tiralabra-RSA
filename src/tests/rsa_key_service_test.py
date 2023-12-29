@@ -5,8 +5,28 @@ from services.rsa_key_service import KeyService
 
 
 class TestKeyService(unittest.TestCase):
+
     def setUp(self):
         self.KeyService = KeyService()
+
+    def test_get_random_integer_is_in_correct_range(self):
+        num1 = self.KeyService.get_random_integer(5, 10)
+        num2 = self.KeyService.get_random_integer(5, 10)
+        num3 = self.KeyService.get_random_integer(5, 10)
+        num4 = self.KeyService.get_random_integer(5, 10)
+        num5 = self.KeyService.get_random_integer(5, 10)
+
+        self.assertGreaterEqual(num1, 5)
+        self.assertGreaterEqual(num2, 5)
+        self.assertGreaterEqual(num3, 5)
+        self.assertGreaterEqual(num4, 5)
+        self.assertGreaterEqual(num5, 5)
+        
+        self.assertLessEqual(num1, 10)
+        self.assertLessEqual(num2, 10)
+        self.assertLessEqual(num3, 10)
+        self.assertLessEqual(num4, 10)
+        self.assertLessEqual(num5, 10)
 
     def test_primality_test_fails_with_negative_numbers(self):
         self.assertFalse(self.KeyService.miller_rabin_primality_test(-10))
