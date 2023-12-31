@@ -24,6 +24,8 @@ This app consists of three views: Keys, Encrypt and Decrypt. You can change betw
 
 Here you can create 2048 bit RSA key-pairs by clicking "Generate" -button at the bottom of the view.
 
+![keys](https://github.com/jhakkari/tiralabra-RSA/blob/master/documentation/pictures/keys_view.png)
+
 Public key: consists of two parts. Public exponent and modulus. Separated by comma and a plankspace.
 
 Private key: consists of two parts. Private exponent and modulus. Separated by comma and a plankspace.
@@ -31,6 +33,8 @@ Private key: consists of two parts. Private exponent and modulus. Separated by c
 ### Encrypt tab
 
 In this tab you can encrypt messages with public key created earlier.
+
+![encrypt](https://github.com/jhakkari/tiralabra-RSA/blob/master/documentation/pictures/encrypt_view.png)
 
 Required input: 
 - Public key: consists of two parts, public exponent and modulus, separated by a comma and a plankspace. You can copy and paste this straight from the previous tab.
@@ -41,6 +45,8 @@ Cipher the given message by clicking "Encrypt" -button at the bottom of the view
 ### Decrypt tab
 
 Here you can decrypt ciphered messages with private key created earlier.
+
+![decrypt](https://github.com/jhakkari/tiralabra-RSA/blob/master/documentation/pictures/decrypt_view.png)
 
 Required input:
 - Private key: consists of two parts, private exponent and modulus, separated by a comma and a plankspace. You can copy and paste this straight from the keys tab.
