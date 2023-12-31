@@ -1,7 +1,7 @@
+import random
+from secrets import SystemRandom
 from algorithms.miller_rabin_primality import primality_test
 from algorithms.extended_euclidean import extended_ecd
-from secrets import SystemRandom
-import random
 
 
 class KeyService:
@@ -44,7 +44,8 @@ class KeyService:
 
     def choose_public_exponent(self, an):
         """
-        Chooses and returns an public exponent such that 2 < exponent < an, exponent and an are coprime.
+        Chooses and returns an public exponent such that 2 < exponent < an,
+        exponent and an are coprime.
         an is an integer where λ(n) is Carmichaels totient function.
         """
 
@@ -56,7 +57,8 @@ class KeyService:
 
     def calculate_private_exponent(self, public_exponent, an):
         """
-        Calculates private exponent s.t. exponent is modular multiplicative inverse of private_exponent mod an.
+        Calculates private exponent s.t. exponent is modular multiplicative inverse of
+        private_exponent mod an.
         an is an integer where λ(n) is Carmichaels totient function.
         """
 

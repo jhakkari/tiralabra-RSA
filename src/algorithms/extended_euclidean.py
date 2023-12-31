@@ -4,7 +4,7 @@ def extended_ecd(a, b):
     Calculates the greatest common divisor for given integers and
     coefficients x,y such that ax + by = gcd(a,b)
     """
-    
+
     old_r = a
     old_s = 1
     old_t = 0
