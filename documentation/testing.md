@@ -4,6 +4,8 @@
 
 This project contains and passes 52 tests.
 
+![coverage](https://github.com/jhakkari/tiralabra-RSA/blob/master/documentation/pictures/coverage_report.png)
+
 Want a closer look? Code coverage is available at [Codecov](https://app.codecov.io/gh/jhakkari/tiralabra-RSA)
 
 ## RSA key-pair creation
