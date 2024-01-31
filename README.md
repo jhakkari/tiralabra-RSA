@@ -9,6 +9,7 @@ A project for generating secure 2048-bit cryptographic keys and encrypting/decry
 - [Testing document](https://github.com/jhakkari/tiralabra-RSA/blob/master/documentation/testing.md)
 - [Implementation](https://github.com/jhakkari/tiralabra-RSA/blob/master/documentation/implementation.md)
 
+
 ![GHA workflow badge](https://github.com/jhakkari/tiralabra-RSA/workflows/CI/badge.svg)
 [![codecov](https://codecov.io/gh/jhakkari/tiralabra-RSA/graph/badge.svg?token=KRX61XAPXP)](https://codecov.io/gh/jhakkari/tiralabra-RSA)
 
