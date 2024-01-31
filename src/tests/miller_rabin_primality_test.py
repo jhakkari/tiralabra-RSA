@@ -54,11 +54,26 @@ class TestMillerRabinPrimality(unittest.TestCase):
     def test_primality_test_identifies_a_pseudoprime(self):
         self.assertFalse(primality_test(29341))
 
-    def test_primality_test_identifies_a_composite(self):
-        self.assertFalse(primality_test(78657823928356521))
+    def test_primality_test_identifies_a_pseudoprime(self):
+        self.assertFalse(primality_test(57805828745692758010628581))
 
-    def test_primality_test_identifies_a_composite(self):
-        self.assertFalse(primality_test(765387265325987970928520075347642952475657823928356521))
+    def test_primality_test_identifies_a_1128_bit_composite(self):
+        self.assertFalse(primality_test((2**521-1) * (2**607-1)))
+    
+    def test_primality_test_identifies_a_1406_bit_composite(self):
+        self.assertFalse(primality_test((2**1279-1) * (2**127-1)))
+
+    def test_primality_test_identifies_a_1800_bit_composite(self):
+        self.assertFalse(primality_test((2**521-1) * (2**1279-1)))
+
+    def test_primality_test_identifies_a_2234_bit_composite(self):
+        self.assertFalse(primality_test((2**31-1) * (2**2203-1)))
+
+    def test_primality_test_identifies_a_2370_bit_composite(self):
+        self.assertFalse(primality_test((2**89-1) * (2**2281-1)))
+
+    def test_primality_test_identifies_a_3324_bit_composite(self):
+        self.assertFalse(primality_test((2**3217-1) * (2**107-1)))
 
     def test_find_factors_returns_correct_exponent_and_integer_on_small_even_numbers(self):
         factors = find_factors(220)
