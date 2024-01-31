@@ -1,20 +1,21 @@
-# Requirement specifikation
+# Requirement specification
 
-The aim of this project is to generate secure cryptographic keys in compliance with the RSA (Rivest-Shamir-Adleman) cryptosystem. This app can also encrypt/decrypt text using generated keys. 
+This project aims to generate secure cryptographic keys in compliance with the RSA (Rivest-Shamir-Adleman) cryptosystem. This app can also encrypt/decrypt text using generated keys. 
 
 ## Algorithms
 
 ### Miller-Rabin Primality Test
 
-Required large prime numbers are chosen using Miller-Rabin primality test.
+Required large prime numbers are chosen using the Miller-Rabin primality test.
 
 ### Extended Euclidean Algorithm
 
-Used to calculate greatest common divisor and during key creation.
+Calculates the greatest common divisor for given integers and coefficients x,y such that ax + by = gcd(a,b).
+Required during key creation.
 
 ### RSA (Rivest-Shamir-Adleman) Algorithm
 
-At the end, cryptographic keys are generated based on output of the above algorithms using RSA-algorithm. Key length is 1024 bits or more.
+In the end, cryptographic keys are generated based on the output of the above algorithms using the RSA algorithm. The key length is 2048 bits.
 
 ## Inputs and outputs
 
@@ -28,7 +29,7 @@ At the end, cryptographic keys are generated based on output of the above algori
 - Code/documentation language: English
 - Degree program: Bachelor’s in Computer Science
 
-(I have taken basic programming courses using java, so peer review with that is also a possibility)
+(I have taken basic programming courses using Java, so peer review with that is also a possibility)
 
 ## Sources
 
